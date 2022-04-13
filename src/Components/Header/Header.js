@@ -3,13 +3,13 @@ import '../../Cover.css'
 
 function Header(){
   return(
-    <header class="mb-auto">
+    <header className="mb-auto">
       <div>
-        <h3 class="float-md-start mb-0">AppTranslate</h3>
-        <nav class="nav nav-masthead justify-content-center float-md-end">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Contact</a>
+        <h3 className="float-md-start mb-0">AppTranslate</h3>
+        <nav className="nav nav-masthead justify-content-center float-md-end">
+          <a className="nav-link active" aria-current="page" href="#">Learn</a>
+          <a className="nav-link" href="#">Add</a>
+          <a className="nav-link" href="#">About</a>
         </nav>
       </div>
     </header>

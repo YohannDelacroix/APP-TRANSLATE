@@ -1,24 +1,19 @@
+import {Routes, Route} from 'react-router-dom'
 
-import Header from './Components/Header/Header.js'
-import Footer from './Components/Footer/Footer.js'
-import './Cover.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-//Tests
-import TestTranslateOptions from './Components/TestTranslateOptions/TestTranslateOptions.js'
+import Training from './Components/Training/Training.js'
+import Add from './Components/Add/Add.js'
+import About from './Components/About/About.js'
+import Home from './Components/Home/Home.js'
 
 function App() {
 
   return (
-    <div className="d-flex h-100 text-center text-white bg-dark">
-      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <Header/>
-        
-        <TestTranslateOptions />
-        <Footer />
-      </div>
-    </div>
-
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Training" element={<Training />} />
+          <Route path="/Add" element={<Add />} />
+          <Route path="/About" element={<About />} />
+        </Routes>
   );
 }
 

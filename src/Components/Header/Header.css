@@ -1,0 +1,8 @@
+a.mainPage{
+  text-decoration: none;
+  color: white;
+}
+
+a.mainPage:hover{
+  color: grey;
+}

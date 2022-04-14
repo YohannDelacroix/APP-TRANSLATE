@@ -2,10 +2,12 @@
   Component TranslateOptions
     The component shows a sentence to translate followed by possible choices
 */
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Option from '../Option/Option.js'
+import { useState } from 'react'
 
 function TranslateOptions({sentence, solutions}){
+  const [idOption, setIdOption] = useState(-1)
 
   return(
     <div className="p-2">
@@ -13,15 +15,51 @@ function TranslateOptions({sentence, solutions}){
         <h4>Choisir la bonne traduction de  ...</h4>
         <p>&emsp; {sentence.content}</p>
       </div>
-    <ul className="list-group">
+
+
+    {idOption == -1 ?
+    (<ul className="list-group">
       {
         solutions.map(
           (aSolution) => {
-              return <Option key={aSolution.id} text={aSolution.content} id={aSolution.id} correct={aSolution.correct} />
+              return <Option key={aSolution.id} solutionBody={aSolution} idOption={idOption} setIdOption={setIdOption} />
           }
         )
       }
-    </ul>
+    </ul>)
+    :  // The answer have been given
+    (
+          solutions.map(
+            (aSolution) => {
+              if(aSolution.id == idOption){
+                  if(aSolution.correct === true){
+                    return <div>
+                            <h5>Correct</h5>
+                            {aSolution.content}
+                          </div>
+                  }
+                  else{
+                    return <div>
+                            <h5>Incorrect</h5>
+                            {
+                              solutions.map( (aSolution) => {
+                                if(aSolution.correct == true){
+                                  return <div>
+                                  Bonne réponse :<br />
+                                  {aSolution.content}
+                                  </div>
+                                }
+                              })
+                            }
+                          </div>
+                  }
+              }
+            }
+          )
+      )}
+
+    <button className="m-2" onClick={ () => setIdOption(-1)}>Retour</button>
+    
     </div>
   )
 }

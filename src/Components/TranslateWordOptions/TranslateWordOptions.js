@@ -6,14 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Option from '../Option/Option.js'
 import { useState } from 'react'
 
-function TranslateOptions({sentence, solutions}){
+function TranslateWordOptions({word, solutions}){
   const [idOption, setIdOption] = useState(-1)
 
   return(
     <div className="p-2">
       <div className="text-start">
         <h4>Choisir la bonne traduction de  ...</h4>
-        <p>&emsp; {sentence.content}</p>
+        <p>&emsp; {word.content}</p>
       </div>
 
 
@@ -35,7 +35,8 @@ function TranslateOptions({sentence, solutions}){
                   if(aSolution.correct === true){
                     return <div>
                             <h5>Correct</h5>
-                            {aSolution.content}
+                            <p>{aSolution.content}</p>
+                            <button className="m-2" onClick={ () => setIdOption(-1)}>Retour</button>
                           </div>
                   }
                   else{
@@ -51,17 +52,19 @@ function TranslateOptions({sentence, solutions}){
                                 }
                               })
                             }
+                            <button className="m-2" onClick={ () => setIdOption(-1)}>Retour</button>
                           </div>
                   }
               }
             }
           )
-      )}
+      )
+      }
 
-    <button className="m-2" onClick={ () => setIdOption(-1)}>Retour</button>
-    
+
+
     </div>
   )
 }
 
-export default TranslateOptions
+export default TranslateWordOptions

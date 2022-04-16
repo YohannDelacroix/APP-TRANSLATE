@@ -41,14 +41,16 @@ function TranslateWordWrite({aWord, theSolution}){
     <div className="p-2">
 
       <div className="text-start">
-        <h4>Choisir la bonne traduction de  ...</h4>
+        <h4>Choose the right translation of ...</h4>
         <p>&emsp; {aWord.content}</p>
       </div>
 
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="d-flex flex-column">
             <textarea type='text' name='inputTranslation' placeholder="Type the translation here" />
-            <button type='submit' disabled={answerGiven}>Valider</button>
+            <button type='submit'>Validate</button>
+            {//<button type='submit' disabled={answerGiven}>Valider</button> //Disable the validation after the answer is given
+            }
         </div>
       </form>
 

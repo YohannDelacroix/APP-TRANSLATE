@@ -17,7 +17,7 @@ function TestTranslateWordWrite(){
   return(
     <div className="border">
 
-      <p className="m-5 border border-warning">Ceci est un composant de test pour TranslateWordWrite</p>
+      <p className="m-5 border border-white">This is a front-end test component for TranslateWordWrite</p>
       <div>
         <TranslateWordWrite aWord={word} theSolution={theSolution}/>
       </div>

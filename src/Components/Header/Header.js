@@ -7,9 +7,9 @@ function Header(){
   return(
     <header className="mb-auto">
       <div>
-        <h3 className="float-md-start mb-0"><Link className="mainPage" to="/">AppTranslate</Link></h3>
+        <h3 className="float-md-start mb-0"><Link className="mainPage" to="/">Vocamax</Link></h3>
         <nav className="nav nav-masthead justify-content-center float-md-end">
-          <Link className="nav-link active" aria-current="page" to="/Training">Training</Link>
+          <Link className="nav-link" aria-current="page" to="/Training">Training</Link>
           <Link className="nav-link" to="/Add">Add</Link>
           <Link className="nav-link" to="/About">About</Link>
         </nav>

@@ -7,6 +7,7 @@ function TestTranslateWordOptions(){
   //The word the user must translate
   const aWord = {
     content: "Mann",
+    translation: "Man",
     id: 516
   }
 
@@ -42,7 +43,7 @@ function TestTranslateWordOptions(){
   return(
     <div className="border">
 
-      <p className="m-5 border border-warning">Ceci est un composant de test pour TranslateWordOptions</p>
+      <p className="m-5 border border-white">This is a front-end test component for TranslateWordOptions</p>
       <div>
         <TranslateWordOptions word={aWord} solutions={solutionsList}/>
       </div>

@@ -12,7 +12,7 @@ function TranslateWordOptions({word, solutions}){
   return(
     <div className="p-2">
       <div className="text-start">
-        <h4>Choisir la bonne traduction de  ...</h4>
+        <h4>Choose the right translation of ...</h4>
         <p>&emsp; {word.content}</p>
       </div>
 
@@ -36,7 +36,7 @@ function TranslateWordOptions({word, solutions}){
                     return <div>
                             <h5>Correct</h5>
                             <p>{aSolution.content}</p>
-                            <button className="m-2" onClick={ () => setIdOption(-1)}>Retour</button>
+                            <button className="m-2" onClick={ () => setIdOption(-1)}>Back</button>
                           </div>
                   }
                   else{
@@ -46,13 +46,13 @@ function TranslateWordOptions({word, solutions}){
                               solutions.map( (aSolution) => {
                                 if(aSolution.correct == true){
                                   return <div>
-                                  Bonne réponse :<br />
+                                  The answer is :<br />
                                   {aSolution.content}
                                   </div>
                                 }
                               })
                             }
-                            <button className="m-2" onClick={ () => setIdOption(-1)}>Retour</button>
+                            <button className="m-2" onClick={ () => setIdOption(-1)}>Back</button>
                           </div>
                   }
               }

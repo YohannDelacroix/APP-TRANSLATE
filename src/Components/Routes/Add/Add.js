@@ -13,7 +13,7 @@ function Add(){
         <Header />
         <div className="d-flex my-3 text-start flex-column">
           <h5>The Add Functionnality</h5>
-          <p>You need to learn some vocabulary ? but you don't know how to memorize it ? Fill in the form below and get it back to your Training</p>
+          <p>You need to learn some vocabulary ? but you don't know how to memorize it ? Fill in the form below and get it back to your training.</p>
           <TestAddForm />
         </div>
         <Footer />

@@ -1,5 +1,58 @@
 
 function SourceLanguage({listLanguages, display, setDisplay, results, setResults}){
+
+  /* handleReduceBlock
+    EventType : Click on button "-"
+    Parameters : boolean
+      Hide or show the Source Language block on screen
+  */
+  const handleReduceBlock = (reduce) => (e) => {
+    setDisplay(prevState => (
+      {
+        ...prevState,
+        sourceLanguage: {...prevState.sourceLanguage,reduced: reduce}
+      }
+    ));
+  };
+
+  /*
+    handleSelectChanged
+      EventType : Select value changed
+      Effects :
+        1. Display the second part of the form
+        2. Memorize the source language
+  */
+  const handleSelectChanged = (e) => {
+    setDisplay(prevState => (
+      {
+        ...prevState,
+        sourceLanguage: {...prevState.sourceLanguage, displayInput: true}
+      }
+    ));
+
+    setResults(prevState => ({
+      ...prevState,
+      sourceLanguage:e.target.value
+    }));
+  };
+
+  /*
+    handleEditInput
+    EventType : The focus is out of the input field
+    Effects : Memorize the source word and display the next step of the form
+  */
+  const handleEditInput = (e) => {
+    setResults(prev => ({
+      ...prev,
+      sourceWord:e.target.value
+    }));
+
+    setDisplay(prevState => ({
+      ...prevState,
+      targetLanguage: {...prevState.targetLanguage, display:true}
+    }));
+  };
+
   return(
     <div>
     {                                 //Source Language when it is not reduced
@@ -8,32 +61,12 @@ function SourceLanguage({listLanguages, display, setDisplay, results, setResults
 
         <div className="d-flex flew-row justify-content-between align-items-center">
           Source language
-          <button className="btn btn-dark" type="button" onClick={ () => {
-            setDisplay(prevState => (
-              {
-                ...prevState,
-                sourceLanguage: {...prevState.sourceLanguage,reduced: true}
-              }
-            ));
-          }}
-          >-</button>
+          <button className="btn btn-dark" type="button" onClick={handleReduceBlock(true)}>-</button>
         </div>
 
         {/* Source Language form */}
         <div className="d-flex m-3 justify-content-between">
-          <select className="align-self-start" defaultValue={results.sourceLanguage} onChange={(e) => {
-              setDisplay(prevState => (
-                {
-                  ...prevState,
-                  sourceLanguage: {...prevState.sourceLanguage, displayInput: true}
-                }
-              ));
-
-              setResults(prevState => ({
-                ...prevState,
-                sourceLanguage:e.target.value
-              }));
-          }}>
+          <select className="align-self-start" defaultValue={results.sourceLanguage} onChange={handleSelectChanged}>
             {listLanguages.map( (aLang) => (
               <option key={aLang} value={aLang}>{aLang}</option>
             ))}
@@ -45,17 +78,7 @@ function SourceLanguage({listLanguages, display, setDisplay, results, setResults
                 name="sourceWord"
                 placeholder="Type the source word"
                 defaultValue={results.sourceWord}
-                onBlur={(e) => {
-                  setResults(prev => ({
-                    ...prev,
-                    sourceWord:e.target.value
-                  }));
-
-                  setDisplay(prevState => ({
-                    ...prevState,
-                    targetLanguage: {...prevState.targetLanguage, display:true}
-                  }));
-                }}
+                onBlur={handleEditInput}
               />
             </div>
           }
@@ -64,14 +87,7 @@ function SourceLanguage({listLanguages, display, setDisplay, results, setResults
       :                                   //Source Language when it is reduced
       <div className="d-flex flex-row justify-content-between align-items-center">
         Source language
-        <button className="btn btn-dark" type="button" onClick={ () => {
-          setDisplay(prev => (
-            {
-              ...prev,
-              sourceLanguage: {...prev.sourceLanguage,reduced: false}
-            }
-          ));
-        }}>+</button>
+        <button className="btn btn-dark" type="button" onClick={handleReduceBlock(false)}>+</button>
       </div>
     }
     </div>

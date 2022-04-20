@@ -1,6 +1,6 @@
-import Header from '../../Header/Header.js'
-import Footer from '../../Footer/Footer.js'
-import '../../../Cover.css'
+import Header from '../Header/Header.js'
+import Footer from '../Footer/Footer.js'
+import '../../Cover.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Home(){

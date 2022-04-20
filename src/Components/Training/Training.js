@@ -1,7 +1,7 @@
-import Header from '../../Header/Header.js'
-import Footer from '../../Footer/Footer.js'
-import TestTranslateWordOptions from '../../TranslateWordOptions/TestTranslateWordOptions.js'
-import TestTranslateWordWrite from '../../TranslateWordWrite/TestTranslateWordWrite.js'
+import Header from '../Header/Header.js'
+import Footer from '../Footer/Footer.js'
+import TestTranslateWordOptions from '../TranslateWordOptions/TestTranslateWordOptions.js'
+import TestTranslateWordWrite from '../TranslateWordWrite/TestTranslateWordWrite.js'
 
 function Training(){
   return(

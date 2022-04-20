@@ -24,19 +24,23 @@
 import {useState, useEffect} from 'react'
 import SourceLanguage from './FormElements/SourceLanguage.js'
 import TargetLanguage from './FormElements/TargetLanguage.js'
+import SelectContext from './FormElements/SelectContext.js'
 
-function AddForm({listLanguages}){
+function AddForm({listLanguages, contextList}){
 
   //Control the form to display the elements one by one
   const[display, setDisplay] = useState({ sourceLanguage: {displayInput: false, reduced: false},
-                                          targetLanguage: {displayInput: false, display: false, reduced: false}
+                                          targetLanguage: {displayInput: false, display: false, reduced: false},
+                                          context:{display:false, reduced: false}
   });
 
   //Here is the result of the form
   const[results, setResults] = useState({ sourceLanguage: "",
                                           sourceWord: "",
                                           targetLanguage: "",
-                                          targetWords: [{word:"", id:0}]});
+                                          targetWords: [{word:"", id:0}],
+                                          context: ""
+                                        });
 
   function handleForm(){
 
@@ -63,7 +67,7 @@ function AddForm({listLanguages}){
 
       <SourceLanguage listLanguages={listLanguages} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
       <TargetLanguage listLanguages={listLanguages} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
-
+      <SelectContext contextList={contextList} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
 
       </form>
   )

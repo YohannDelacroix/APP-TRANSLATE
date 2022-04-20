@@ -7,10 +7,25 @@ function TestAddForm(){
     'German',
     'French',
     'Spanish'
-  ]
+  ];
+
+  const contextList = [
+    'Nature',
+    'Music',
+    'Politic',
+    'Science',
+    'Cinema',
+    'Space',
+    'Physics',
+    'Cities',
+    'Asia',
+    'Buddhism',
+    'All',
+    'None'
+  ];
 
   return(
-    <AddForm listLanguages={listLanguages} />
+    <AddForm listLanguages={listLanguages} contextList={contextList} />
   )
 
 }

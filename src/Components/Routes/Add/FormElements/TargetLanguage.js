@@ -87,6 +87,19 @@ function TargetLanguage({listLanguages, display, setDisplay, results, setResults
     }))
   };
 
+  /*
+    handleNextStep
+      EventType : Click on the button "next"
+      Effects : Display the next step of the form "Context"
+  */
+  const handleNextStep = (e) => {
+    console.log()
+    setDisplay( prevDisplay => ({
+      ...prevDisplay,
+      context:{...prevDisplay.context, display: true}
+    }));
+  };
+
   return(
     <div>
     {
@@ -114,6 +127,11 @@ function TargetLanguage({listLanguages, display, setDisplay, results, setResults
               {display.targetLanguage.displayInput &&
               <button type="button" className="mt-3 btn btn-light"
                 onClick={handleAddInput}>Add</button>}
+
+              {display.targetLanguage.displayInput &&
+              <button type="button" className="mt-3 btn btn-light" onClick={handleNextStep}>Next</button>
+              }
+
               </div>
 
               { //Display the input text when the source language is selected

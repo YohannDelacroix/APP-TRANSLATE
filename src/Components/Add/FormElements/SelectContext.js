@@ -2,18 +2,18 @@
   SelectContext component ,
       List of checkbox to associate a word to a context
       The list is sorted in the alphabetic order
-      Buttons : ChooseAll and ChooseNone
+      Buttons : ChooseAll
                 Skip
 
       The checkbox list must be displayed by row of three elements
-      
+
 */
 
 import {useState, useEffect} from 'react'
 function SelectContext({contextList, display, setDisplay, results, setResults}){
   const title = "Select a context";   //Title shown on the top of the section block
 
-  const [rowIndex, setRowIndex] = useState(0);
+
 
   //Initialise a hash map for the context's checkbox
   //  Key : name of the context
@@ -27,6 +27,8 @@ function SelectContext({contextList, display, setDisplay, results, setResults}){
 
   /*
     handleCheckBox
+    EventType : The checkbox have changed
+    Effects : Set the new value in the checked state
   */
   const handleCheckBox = (e) => {
     let checkedTemp = new Map(checked);
@@ -49,17 +51,60 @@ function SelectContext({contextList, display, setDisplay, results, setResults}){
     ));
   };
 
-  const displayContext = () => {
-    return contextList.map( context => {
-      return (<div><label key={context}>
-        <input type="checkbox" name="context" value={context} defaultChecked={checked.get(context)} onChange={handleCheckBox} />
-        {context}
-      </label></div>)
-    })
+  /*
+    handleSelectAll
+    Parameters: all(boolean)
+    EventType: Click on the buttons Select All or No one
+    Effects : Check all the checkboxes to the value of parameter
+              Display the next step
+  */
+  const handleSelectAll = (all) => (e) => {
+    let checkedTemp = new Map(checked);
+    checkedTemp.forEach((value, key) => {
+      checkedTemp.set(key, all)
+    });
+    setChecked( prevChecked => (checkedTemp));
+    displayNextStep();
+
   };
 
+  /*
+    displayNextStep
+      Show the next step of the form : Features
+  */
+  const displayNextStep = () => {
+    setDisplay(prevDisplay => ({
+      ...prevDisplay,
+      features:{...prevDisplay.features, display:true}
+    }));
+  };
+
+  /*
+    saveResults
+      analyse the checkboxes into checked state and fill the datas in results state
+  */
+  const saveResults = () => {
+    let contextTab = []
+    checked.forEach((value, key) => {
+      if(value){
+        contextTab.push(key);
+      }
+    });
+    //console.log(contextTab);
+    setResults(prevResults => ({
+      ...prevResults,
+      context:contextTab
+    }));
+
+
+  };
+
+  /*
+    Save the results each time a box is checked
+  */
   useEffect( () => {
     console.log(checked);
+    saveResults();
   }, [checked])
 
 
@@ -77,14 +122,27 @@ function SelectContext({contextList, display, setDisplay, results, setResults}){
 
           <div>
             <p>Define the contexts in which the word you typed can be used</p>
+            <div className="d-flex flex-row justify-content-between">
+            <div>
             {
               contextList.map( context => {
-                return (<div><label key={context}>
-                  <input type="checkbox" name="context" value={context} defaultChecked={checked.get(context)} onChange={handleCheckBox} />
+                return (<div key={context}><label>
+                  <input type="checkbox" name="context" value={context} checked={!!checked.get(context)} onChange={handleCheckBox} />
                   {context}
                 </label></div>)
               })
             }
+            </div>
+            <div className="d-flex flex-column justify-content-between">
+              <div className="d-flex flex-row">
+                <button type="button" className="mx-2 btn btn-light" onClick={handleSelectAll(true)}>Select All</button>
+                <button type="button" className="btn btn-light" onClick={handleSelectAll(false)}>No one</button>
+              </div>
+              <div>
+                <button type="button" className="btn btn-light" onClick={displayNextStep}>Next</button>
+              </div>
+            </div>
+            </div>
           </div>
 
         </div>

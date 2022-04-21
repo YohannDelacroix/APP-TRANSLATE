@@ -20,8 +20,6 @@ function TestAddForm(){
     'Cities',
     'Asia',
     'Buddhism',
-    'All',
-    'None'
   ];
 
   return(

@@ -21,17 +21,27 @@
     -> Validate and return the datas in an object
 */
 
+
+/*
+      BUG : When no source/target word is typed, you can access the next displays (!!!!)
+*/
+
 import {useState, useEffect} from 'react'
 import SourceLanguage from './FormElements/SourceLanguage.js'
 import TargetLanguage from './FormElements/TargetLanguage.js'
 import SelectContext from './FormElements/SelectContext.js'
+import Features from './FormElements/Features.js'
 
 function AddForm({listLanguages, contextList}){
 
   //Control the form to display the elements one by one
+  //  display : Is the part of the form visible and reducible ?
+  //  reduced : Is the form reduced or entirely visible ?
+  //  displayInput : is the input field visible ? ( <- Maybe this one could go into respective components)
   const[display, setDisplay] = useState({ sourceLanguage: {displayInput: false, reduced: false},
                                           targetLanguage: {displayInput: false, display: false, reduced: false},
-                                          context:{display:false, reduced: false}
+                                          context:{display:false, reduced: false},
+                                          features:{display:false, reduced: false}
   });
 
   //Here is the result of the form
@@ -39,7 +49,7 @@ function AddForm({listLanguages, contextList}){
                                           sourceWord: "",
                                           targetLanguage: "",
                                           targetWords: [{word:"", id:0}],
-                                          context: ""
+                                          context: [{word:""}]
                                         });
 
   function handleForm(){
@@ -68,7 +78,7 @@ function AddForm({listLanguages, contextList}){
       <SourceLanguage listLanguages={listLanguages} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
       <TargetLanguage listLanguages={listLanguages} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
       <SelectContext contextList={contextList} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
-
+      <Features display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
       </form>
   )
 }

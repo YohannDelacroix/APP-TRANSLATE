@@ -1,6 +1,6 @@
 
 function SourceLanguage({listLanguages, display, setDisplay, results, setResults}){
-
+  const title = (<h6>Source Language</h6>);
   /* handleReduceBlock
     EventType : Click on button "-"
     Parameters : boolean
@@ -38,7 +38,7 @@ function SourceLanguage({listLanguages, display, setDisplay, results, setResults
 
   /*
     handleEditInput
-    EventType : The focus is out of the input field
+    EventType : The input field is changed
     Effects : Memorize the source word and display the next step of the form
   */
   const handleEditInput = (e) => {
@@ -54,19 +54,21 @@ function SourceLanguage({listLanguages, display, setDisplay, results, setResults
   };
 
   return(
+    display.sourceLanguage.display &&
     <div>
     {                                 //Source Language when it is not reduced
       !display.sourceLanguage.reduced ?
       <div className="d-flex flex-column">
 
         <div className="d-flex flew-row justify-content-between align-items-center">
-          Source language
+          {title}
           <button className="btn btn-dark" type="button" onClick={handleReduceBlock(true)}>-</button>
         </div>
 
         {/* Source Language form */}
         <div className="d-flex m-3 justify-content-between">
           <select className="align-self-start" defaultValue={results.sourceLanguage} onChange={handleSelectChanged}>
+            <option value="null"></option>
             {listLanguages.map( (aLang) => (
               <option key={aLang} value={aLang}>{aLang}</option>
             ))}
@@ -78,7 +80,7 @@ function SourceLanguage({listLanguages, display, setDisplay, results, setResults
                 name="sourceWord"
                 placeholder="Type the source word"
                 defaultValue={results.sourceWord}
-                onBlur={handleEditInput}
+                onChange={handleEditInput}
               />
             </div>
           }
@@ -86,7 +88,7 @@ function SourceLanguage({listLanguages, display, setDisplay, results, setResults
       </div>
       :                                   //Source Language when it is reduced
       <div className="d-flex flex-row justify-content-between align-items-center">
-        Source language
+        {title}
         <button className="btn btn-dark" type="button" onClick={handleReduceBlock(false)}>+</button>
       </div>
     }

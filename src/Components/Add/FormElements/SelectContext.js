@@ -11,7 +11,7 @@
 
 import {useState, useEffect} from 'react'
 function SelectContext({contextList, display, setDisplay, results, setResults}){
-  const title = "Select a context";   //Title shown on the top of the section block
+  const title = <h6>Select a context</h6>;   //Title shown on the top of the section block
 
 
 
@@ -64,8 +64,6 @@ function SelectContext({contextList, display, setDisplay, results, setResults}){
       checkedTemp.set(key, all)
     });
     setChecked( prevChecked => (checkedTemp));
-    displayNextStep();
-
   };
 
   /*
@@ -75,7 +73,7 @@ function SelectContext({contextList, display, setDisplay, results, setResults}){
   const displayNextStep = () => {
     setDisplay(prevDisplay => ({
       ...prevDisplay,
-      features:{...prevDisplay.features, display:true}
+      validation:{...prevDisplay.validation, display:true}
     }));
   };
 
@@ -138,7 +136,7 @@ function SelectContext({contextList, display, setDisplay, results, setResults}){
                 <button type="button" className="mx-2 btn btn-light" onClick={handleSelectAll(true)}>Select All</button>
                 <button type="button" className="btn btn-light" onClick={handleSelectAll(false)}>No one</button>
               </div>
-              <div>
+              <div className="d-flex flex-row-reverse">
                 <button type="button" className="btn btn-light" onClick={displayNextStep}>Next</button>
               </div>
             </div>

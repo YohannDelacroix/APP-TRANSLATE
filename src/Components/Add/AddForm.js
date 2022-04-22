@@ -31,6 +31,7 @@ import SourceLanguage from './FormElements/SourceLanguage.js'
 import TargetLanguage from './FormElements/TargetLanguage.js'
 import SelectContext from './FormElements/SelectContext.js'
 import Features from './FormElements/Features.js'
+import Finalization from './Finalization.js'
 
 function AddForm({listLanguages, contextList}){
 
@@ -38,23 +39,37 @@ function AddForm({listLanguages, contextList}){
   //  display : Is the part of the form visible and reducible ?
   //  reduced : Is the form reduced or entirely visible ?
   //  displayInput : is the input field visible ? ( <- Maybe this one could go into respective components)
-  const[display, setDisplay] = useState({ sourceLanguage: {displayInput: false, reduced: false},
+  const displayDefault = { sourceLanguage: {display:true, displayInput: false, reduced: false},
                                           targetLanguage: {displayInput: false, display: false, reduced: false},
                                           context:{display:false, reduced: false},
-                                          features:{display:false, reduced: false}
-  });
+                                          features:{display:false, reduced: false},
+                                          validation:{display:false},
+                                          finalization:{display:false}
+  };
+  const[display, setDisplay] = useState(displayDefault);
 
   //Here is the result of the form
-  const[results, setResults] = useState({ sourceLanguage: "",
+  const resultsDefault = { sourceLanguage: "",
                                           sourceWord: "",
                                           targetLanguage: "",
                                           targetWords: [{word:"", id:0}],
-                                          context: [{word:""}]
-                                        });
+                                          context: [{word:""}],
+                                          features: {type:"", gender:"", number:""}
+                                        };
+  const[results, setResults] = useState(resultsDefault);
 
-  function handleForm(){
 
-  }
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    if(true){
+      setDisplay( prevDisplay => ({
+        ...displayDefault,
+        sourceLanguage:{...displayDefault, display:false},
+        finalization:{display:true}
+      }));
+    }
+  };
 
   //Displaying the results in the console (Test checking)
   useEffect( () => {
@@ -77,8 +92,17 @@ function AddForm({listLanguages, contextList}){
 
       <SourceLanguage listLanguages={listLanguages} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
       <TargetLanguage listLanguages={listLanguages} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
-      <SelectContext contextList={contextList} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
       <Features display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
+      <SelectContext contextList={contextList} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
+      {
+        display.validation.display && <div className="d-flex my-3 flex-column">
+          <h5>Final Step</h5>
+          <div className="d-flex justify-content-center">
+          <button className="btn btn-light">Send my word</button>
+          </div>
+        </div>
+      }
+      <Finalization displayDefault={displayDefault} resultsDefault={resultsDefault} display={display} setDisplay={setDisplay} results={results} setResults={setResults} />
       </form>
   )
 }

@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import './flexGrow.css'
 function TargetLanguage({listLanguages, display, setDisplay, results, setResults}){
+  const title = <h6>Target Language</h6>;
   const [idGen, setIdGen] = useState(0) //Generate a new id for an input field
 
   /* handleReduceBlock
@@ -71,7 +72,7 @@ function TargetLanguage({listLanguages, display, setDisplay, results, setResults
 
   /*
     handleEditInput
-    EventType : The focus is out of the input field
+    EventType : The input field is changed
     Effects : Memorize the target(s) word(s)
   */
   const handleEditInput = (element) => (e) => {
@@ -96,7 +97,7 @@ function TargetLanguage({listLanguages, display, setDisplay, results, setResults
     console.log()
     setDisplay( prevDisplay => ({
       ...prevDisplay,
-      context:{...prevDisplay.context, display: true}
+      features:{...prevDisplay.features, display: true}
     }));
   };
 
@@ -111,14 +112,16 @@ function TargetLanguage({listLanguages, display, setDisplay, results, setResults
           !display.targetLanguage.reduced ?         //Display when not reduced
           <div className="d-flex flex-column">
             <div className="d-flex flew-row justify-content-between align-items-center">
-              Target language
+              {title}
               <button className="btn btn-dark" type="button" onClick={handleReduceBlock(true)}>-</button>
             </div>
 
           {/* FORM */}
+            <div>
             <div className="d-flex m-3 justify-content-between">
               <div className="d-flex flex-column ">
               <select  className="align-self-start" defaultValue={results.targetLanguage} onChange={handleSelectChanged}>
+              <option value="null"></option>
                 {listLanguages.map( (aLang) => (
                   <option key={aLang} value={aLang}>{aLang}</option>
                 ))}
@@ -128,9 +131,7 @@ function TargetLanguage({listLanguages, display, setDisplay, results, setResults
               <button type="button" className="mt-3 btn btn-light"
                 onClick={handleAddInput}>Add</button>}
 
-              {display.targetLanguage.displayInput &&
-              <button type="button" className="mt-3 btn btn-light" onClick={handleNextStep}>Next</button>
-              }
+
 
               </div>
 
@@ -151,7 +152,7 @@ function TargetLanguage({listLanguages, display, setDisplay, results, setResults
                       name="sourceWord"
                       placeholder="Type a target word"
                       defaultValue={element.word}
-                      onBlur={handleEditInput(element)}
+                      onChange={handleEditInput(element)}
                     />
                     </div>
                   ))
@@ -160,10 +161,17 @@ function TargetLanguage({listLanguages, display, setDisplay, results, setResults
                 </div>
               }
             </div>
+
+            {display.targetLanguage.displayInput &&
+              <div className="m-3 d-flex flex-row-reverse">
+                <button type="button" className="mt-3 btn btn-light" onClick={handleNextStep}>Next</button>
+              </div>
+            }
+            </div>
           </div>
           :                                         //Display when reduced
           <div className="d-flex flex-row justify-content-between align-items-center">
-            Target language
+            {title}
             <button className="btn btn-dark" type="button" onClick={handleReduceBlock(false)}>+</button>
           </div>
         }

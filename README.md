@@ -1,3 +1,4 @@
+# Follow this link to get an overview
 https://yohannred.github.io/APP-TRANSLATE/
 
 # Getting Started with Create React App
